@@ -44,7 +44,7 @@
                 <div class="d-flex flex-column justify-content-start align-items-start h-100 p-4 shadow gap-2">
                     <img src="{{plant.image.url}}" class="w-100 poster-thumb object-fit-cover"/>
                     <a href="{% url 'plants:plant_detail_view' plant.id %}"><h3>{{plant.name}}</h3></a>
-                    <h5> {{plant.about}}</h5>
+                    <p> Click on the title to know more about it </p>
                     <h6>{{plant.category}}</h6>
                 </div>
             </div> 

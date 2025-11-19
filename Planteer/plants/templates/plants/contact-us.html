@@ -24,14 +24,14 @@
                             <h3>
                                 First Name
                             </h3>
-                            <input type="text" placeholder="Enter Your First Name" name="first_name" class="form-control" required minlength="5" maxlength="512"/>        
+                            <input type="text" placeholder="Enter Your First Name" name="first_name" class="form-control" required minlength="1" maxlength="512"/>        
                         </div>
                     
                         <div class="d-flex flex-column gap-2">
                             <h3>
                                 Last Name
                             </h3>                                        
-                            <input type="text" placeholder="Enter Your Last Name" name="last_name" class="form-control" required minlength="5" maxlength="512"/>        
+                            <input type="text" placeholder="Enter Your Last Name" name="last_name" class="form-control" required minlength="1" maxlength="512"/>        
                         </div>
                     </div>
                     <div class="d-flex flex-column gap-2">
@@ -43,9 +43,13 @@
                     <h3>
                         Your message
                     </h3>
-                    <textarea placeholder="Enter Your question or message" name="about" class="form-control" required></textarea>
-                    
-                    <input type="submit" value="Submit" class="btn btn-primary" />
+                    <textarea placeholder="Enter Your question or message" name="message" class="form-control" required></textarea>
+                                    <h3>
+                    Created at
+                </h3>
+                <input type="date" name="created_at" class="form-control"/>
+
+                <input type="submit" value="Submit" class="btn btn-primary" />
                     
                 </form>
 

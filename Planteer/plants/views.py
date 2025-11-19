@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 
 from .models import Plant
+from .models import Contact
 
 # Create your views here.
 
@@ -83,4 +84,17 @@ def plant_search_view(request:HttpRequest):
 #contact us page
 def contact_us_view(request:HttpRequest):
 
+    if request.method == "POST":
+
+        new_msg = Contact( first_name = request.POST["first_name"], last_name = request.POST["last_name"], email = request.POST["email"], message = request.POST["message"],  created_at = request.POST["created_at"]  )
+        new_msg.save()
+
+        return redirect('plants:contact_message_view')
     return render(request, "plants/contact-us.html")
+
+#message page
+def contact_message_view(request:HttpRequest):
+
+    msg = Contact.objects.all()
+    
+    return render(request, "plants/message.html",{"msg":msg})

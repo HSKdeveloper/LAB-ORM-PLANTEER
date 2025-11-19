@@ -1,0 +1,29 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %}Show all plant post{% endblock %}
+
+{% block content %}
+<h1>
+    Messages from Users
+</h1>
+
+
+<div class="row mt-2 row-cols-1 row-cols-md-3 g-4 d-flex justify-content-center">
+
+    {% for Messages in msg %}
+      <div class="col">
+          
+            <div class="d-flex flex-column justify-content-start align-items-start h-100 p-4 shadow gap-2">
+
+                <h3>{{Messages.first_name}}{{Messages.last_name}}</h3>
+                <h4>{{Messages.email}}</h4>
+                <p> {{Messages.message}} </p>
+                <h5>{{Messages.created_at}}</h5>
+            </div>
+      </div>
+    {% endfor %}
+  
+  
+</div>
+{% endblock %}
