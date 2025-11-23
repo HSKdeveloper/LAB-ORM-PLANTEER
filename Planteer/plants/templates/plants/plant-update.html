@@ -55,7 +55,15 @@
                         <option value="other">Other</option>
                     </select>   
                 </div>
-
+                <h3>
+                    Native to
+                </h3>
+                <div class="d-flex align-items-center gap-2">
+                    {% for country in countries %}
+                        <input type="checkbox" class="form-check-input" name="countries" id="check-{{country.id}}" value="{{country.id}}" {% if country in plant.countries.all %} checked {% endif %}>
+                        <label for="check-{{country.id}}">{{ country.name }}</label>
+                    {% endfor %}
+                </div>
                 <h3>
                     Is edible
                 </h3>

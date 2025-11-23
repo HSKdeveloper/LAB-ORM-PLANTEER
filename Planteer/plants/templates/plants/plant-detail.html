@@ -4,6 +4,19 @@
 <!-- Page title -->
 {% block title %} {% endblock %}
 
+<!-- Coustome style -->
+{% block style %} 
+
+<style>
+    img
+    {
+        height:250px;
+        width: 300px;
+    }
+</style>
+
+{% endblock %}
+
 <!-- Page content -->
 {% block content %}
 
@@ -21,17 +34,28 @@
 <div class="row d-flex justify-content-center">
 
     <div class="col">
-        <div class="d-flex flex-row gap-2">
-            <div class="d-flex justify-content-center align-items-center">
-                <img src="{{ plant.image.url}}" alt="plant image" class="w-300 h-300">
+        <div class="d-flex flex-row gap-2 justify-content-center align-items-center">
+            <div class="d-flex justify-content-center align-items-center m-3" >
+                <img src="{{ plant.image.url}}" alt="plant image">
             </div>
-            <div class="d-flex flex-column justify-content-center ">
+            <div class="d-flex flex-column justify-content-center col-6 ">
                 <h2>{{ plant.name }}</h2>
                 <h6>{{plant.category}}</h6> 
                 <p>{{ plant.about }}</p>
+                <h5>Native to: </h5>
+                <div class="d-flex gap-2">
+                    {% for country in plant.countries.all  %}
+                        <p> {{ country }} </p>
+                    {% endfor %}
+
+                </div>
+                
+                
+                <h3>Is Edible:</h3>
+                <p>{{plant.is_edible}}</p>
+                <h3>Used For:</h3>
+                <p> {{plant.used_for}}</p>
                 <p>{{ plant.created_at}}</p>
-                <p>  {{plant.is_edible}}</p>
-                <h5> {{plant.used_for}}</h5>
                                
             </div>
 
@@ -39,7 +63,7 @@
         <div class="d-flex justify-content-end gap-2">
 
             <a href="{% url 'plants:plant_update_view' plant.id %}" class="btn btn-primary">update</a>
-            <a  class="btn btn-danger" href="{% url 'plants:plant_delete_view' plant.id %}"  data-bs-toggle="modal" data-bs-target="#exampleModal">delete</a>
+            <a  class="btn btn-danger" href="{% url 'plants:plant_delete_view' plant.id %}">delete</a>
         </div>
     </div>
 

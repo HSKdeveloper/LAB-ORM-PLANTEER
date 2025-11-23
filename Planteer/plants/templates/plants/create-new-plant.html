@@ -6,12 +6,12 @@
 
 <!-- Page content -->
 {% block content %}
-    <h1>
+    <h1 class="d-flex align-items-center justify-content-center">
         Create New Plant Post
     </h1>
 
     <div class="row d-flex justify-content-center">
-        <div class="col-6">
+        <div class="col-8">
 
             <form  class="d-flex flex-column gap-2" action="{% url 'plants:create_plant_view' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -53,6 +53,16 @@
                 </div>
 
                 <h3>
+                    Native to
+                </h3>
+                <div class="d-flex align-items-center gap-2">
+                    {% for country in countries %}
+                        <input type="checkbox" class="form-check-input" name="countries" id="check-{{country.id}}" value="{{country.id}}">
+                        <label for="check-{{country.id}}">{{ country.name }}</label>
+                    {% endfor %}
+                </div>
+
+                <h3>
                     Is edible
                 </h3>
                 <select class="form-select" name="is_edible">
@@ -60,12 +70,18 @@
                         <option value= "True"> Yes </option>
                         <option value="False" > No </option>
                 </select> 
+
+
+
+                <!--
                 <h3>
                     Created at
                 </h3>
                 <input type="date" name="created_at" class="form-control"/>
+                
+                -->
 
-                <input type="submit" value="Create Plant Post" class="btn btn-primary" />
+                <input type="submit" value="Create Plant Post" class="btn btn-primary mt-4" />
                 
             </form>
 
