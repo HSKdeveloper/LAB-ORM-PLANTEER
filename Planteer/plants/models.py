@@ -30,7 +30,7 @@ class Plant(models.Model):
     countries = models.ManyToManyField( Country )
 
     def __str__(self):
-        return self.title
+        return self.name
 
 
 class Review (models.Model):
@@ -53,3 +53,6 @@ class Contact(models.Model):
     email = models.EmailField()
     message = models.TextField()
     created_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.first_name

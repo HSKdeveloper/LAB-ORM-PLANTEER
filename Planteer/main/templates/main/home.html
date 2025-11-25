@@ -23,8 +23,8 @@
             Plant Database For Plants Lovers
         </h2>
         <div class="search-section">
-            <form role="search" method="get"action="{% url 'plants:plant_search_view' %}" >
-                <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="search" >
+            <form role="search" method="get" action="{% url 'plants:plant_search_view' %}" >
+                <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="search"  value="{{request.GET.search}}" required minlength="1">
             </form>
         </div>
     </div>

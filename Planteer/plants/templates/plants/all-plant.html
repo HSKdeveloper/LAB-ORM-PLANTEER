@@ -9,33 +9,44 @@
 </h1>
 
     <div class="d-flex flex-row gap-2 align-items-center">
-        <h5 class="m-0 p-0">Category: </h5>
+        <h5 >Category: </h5>
         <form method="GET">
-            <select  name="category">
-                            
-                <option selected>Category</option>
-                <option value="fruits">Fruits</option>
-                <option value="vegetables">Vegetables</option>
-                <option value="leafy_greens">Leafy Greens</option>
-                <option value="ornamental">Ornamental</option>
-                <option value="other">Other</option>
-            </select>   
 
-            <button type="submit">Category Filter</button>         
-        </form>
-        <h5 class="m-0 p-0">Is edible: </h5>
-        <form method="GET">
-  
-            <select name="is_edible">
-                <option value="">Any</option>
-                <option value="True">Edible</option>
-                <option value="False">Not Edible</option>
-            </select>
+            <div class="d-flex gap-2">
+                <select  name="category" value="">
+                                
+                    <option selected>Category</option>
+                    <option value="fruits" {% if request.GET.category == 'fruits' %} selected {% endif %}>Fruits</option>
+                    <option value="vegetables" {% if request.GET.category == 'vegetables' %} selected {% endif %}>Vegetables</option>
+                    <option value="leafy_greens" {% if request.GET.category == 'leafy_greens' %} selected {% endif %}>Leafy Greens</option>
+                    <option value="ornamental" {% if request.GET.category == 'ornamental' %} selected {% endif %}>Ornamental</option>
+                    <option value="other" {% if request.GET.category == 'other' %} selected {% endif %}>Other</option>
+                </select>   
+
+                <h5 >Is edible: </h5>
+    
+                <select name="is_edible">
+                    <option value="">Any</option>
+                    <option value="True" {% if request.GET.is_edible == 'True' %} selected {% endif %}>Edible</option>
+                    <option value="False" {% if request.GET.is_edible == 'False' %} selected {% endif %}>Not Edible</option>
+                </select>
+
+                <h5>Countries</h5>
+                <select name="countries.all">
+                    <option value="">Any</option>
+                    {% for country in countries %}
+                        <option value="{{countries.name}}" {% if request.GET.countries.name == '{{countries.name}}' %} selected {% endif %}>{{ country.name }}</option>
+                    {% endfor %}
+                    
+                </select>
+
+                <button type="submit"> Apply </button> 
+            </div>
             
-            <button type="submit">Edible Filter</button>         
-        </form>
-  
+                    
+        </form>       
     </div>
+
 
 
 <div class="row mt-2 row-cols-1 row-cols-md-3 g-4 d-flex justify-content-center">

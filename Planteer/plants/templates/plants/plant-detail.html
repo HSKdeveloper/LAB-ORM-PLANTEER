@@ -20,17 +20,6 @@
 <!-- Page content -->
 {% block content %}
 
-<!---
-<div class="content">
-    <img src="{{ plant.image.url}}" alt="plant image" class="w-100">
-    <div class="content-detail">
-        <h5> {{plant.about}}</h5>
-        <h6>{{plant.category}}</h6>
-    </div>
-
-</div>
--->
-
 <div class="row d-flex justify-content-center">
 
     <div class="col">
@@ -45,7 +34,7 @@
                 <h5>Native to: </h5>
                 <div class="d-flex gap-2">
                     {% for country in plant.countries.all  %}
-                        <p> {{ country }} </p>
+                        <a href="{% url 'plants:all_plants_view' %}"><p class="{{country}}"> {{ country }} </p></a>
                     {% endfor %}
 
                 </div>
