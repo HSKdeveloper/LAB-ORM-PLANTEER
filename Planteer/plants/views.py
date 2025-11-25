@@ -16,6 +16,7 @@ def create_plant_view(request:HttpRequest):
 
     countries = Country.objects.all()
 
+
     if request.method == "POST":
 
         plant_form = PlantForm(request.POST)
@@ -28,7 +29,7 @@ def create_plant_view(request:HttpRequest):
         #new_plant = Plant( name = request.POST["name"], about = request.POST["about"], used_for = request.POST["used_for"], image = request.FILES["image"], category = request.POST["category"], is_edible = request.POST["is_edible"])
         #new_plant.save()
 
-        #new_plant.countries.set(request.POST.getlist("countries"))
+        #new_plant.countries.set(request.POST.getlist{"countries"})
 
         
 
@@ -54,9 +55,13 @@ def all_plants_view(request:HttpRequest):
             plants = plants.filter(is_edible=False)
     
     #country filter
-    countries_
-    if "countries.all" in request.GET:
-        countries = Country.objects.filter( countries__id = request.GET[""])
+    country_filter = request.GET.get('name')
+    if country_filter:
+        plants = plants.filter(countries__name = country_filter )
+        #countries = countries.filter(name = country_filter)
+    
+    #if "countries.all" in request.GET:
+        #countries = Country.objects.filter( countries__id = request.GET[""])
 
     
     
@@ -86,6 +91,7 @@ def plant_delete_view(request:HttpRequest, plant_id:int):
 
 #update plant
 def plant_update_view (request:HttpRequest, plant_id):
+
     plant = Plant.objects.get(pk=plant_id)
 
     all_countries = Country.objects.all()

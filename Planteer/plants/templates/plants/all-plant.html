@@ -32,13 +32,30 @@
                 </select>
 
                 <h5>Countries</h5>
-                <select name="countries.all">
+                <select name="name">
                     <option value="">Any</option>
                     {% for country in countries %}
-                        <option value="{{countries.name}}" {% if request.GET.countries.name == '{{countries.name}}' %} selected {% endif %}>{{ country.name }}</option>
+                        <option value="{{country.name}}" {% if request.GET.name == country.name %} selected {% endif %}>{{ country.name }}</option>
                     {% endfor %}
                     
-                </select>
+                </select>     
+
+        <!--    <h5>Countries</h5>
+                <select name="name">
+                    <option value="">Any</option>
+                    <option value="Iran" {% if request.GET.countries.name == 'Iran' %} selected {% endif %}>Iran</option>
+                    <option value="Jordan" {% if request.GET.countries.name == 'Jordan' %} selected {% endif %}>Jordan</option>
+                    <option value="Iraq" {% if request.GET.countries.name == 'Iraq' %} selected {% endif %}>Iraq</option>
+                    <option value="India" {% if request.GET.countries.name == 'India' %} selected {% endif %}>India</option>
+                    <option value="New Zealnd" {% if request.GET.countries.name == 'New Zealnd' %} selected {% endif %}>New Zealnd</option>
+                    <option value="China" {% if request.GET.countries.name == 'China' %} selected {% endif %}>China</option>
+                    <option value="America" {% if request.GET.countries.name == 'America' %} selected {% endif %}>America</option>
+                    <option value="New England" {% if request.GET.countries.name == 'New England' %} selected {% endif %}>New England</option>
+                    <option value="Australia" {% if request.GET.countries.name == 'Australia' %} selected {% endif %}>Australia</option>
+                    <option value="Qatar" {% if request.GET.countries.name == 'Qatar' %} selected {% endif %}>Qatar</option>
+                 
+                </select>  
+-->
 
                 <button type="submit"> Apply </button> 
             </div>
