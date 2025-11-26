@@ -17,16 +17,25 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        {% url 'plants:all_plants_view' as all_plants_url %}
+        {% url 'plants:contact_us_view' as contact_url %}
+        {% url 'plants:create_plant_view' as create_plant_url  %}
+
         <div class="collapse navbar-collapse gap-2" id="navbarTogglerDemo02">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                 <li class="nav-item">
-
+                    <a class="nav-link {% if request.path == all_plants_url %} active {% endif %}" href="{{all_plants_url}}">All Plants</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == contact_url %} active {% endif %}" href="{{contact_url}}">Contact us</a>
+                </li>
+
             </ul>
-            <a class="nav-link" href="{% url 'plants:all_plants_view' %}">All Plants</a>
-            <a class="nav-link" href="{% url 'plants:contact_us_view' %}">Contact us</a>
-            <a class="nav-link" href="{% url 'plants:create_plant_view' %}">
+
+
+            <a class="nav-link {% if request.path == create_plant_url %} active {% endif %}" href="{{create_plant_url}}">
                 <button class="btn btn-outline-success">Add Plant</button>
             </a>                        
         </div>
@@ -35,6 +44,15 @@
     </nav>
 
     <main>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {{message.tag}} alert-dismissible fade show" role="alert">
+                {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+            {% endfor %}
+        {% endif %}        
         {% block content %}
 
         {% endblock %}

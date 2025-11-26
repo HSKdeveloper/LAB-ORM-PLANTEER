@@ -42,7 +42,18 @@
     -1px 1px 0 #000, 
     1px 1px 0 #000; 
 }
+/*
+a {
+    color:black;
+    text-decoration: none;
+    transition: all 0.1s ease-in;
+}
 
+a:hover {
+    color:rgb(255, 179, 0);
+    transition: all 0.15s ease-out;
+}
+*/
 /* ---- ----- --- */
 .content
 {

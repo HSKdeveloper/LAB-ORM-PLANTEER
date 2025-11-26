@@ -6,6 +6,12 @@ from .models import Contact
 
 from .forms import PlantForm
 
+#for pagination
+from django.core.paginator import Paginator
+
+#for messages notifications
+from django.contrib import messages
+
 # Create your views here.
 
 #create new plant
@@ -22,6 +28,8 @@ def create_plant_view(request:HttpRequest):
         plant_form = PlantForm(request.POST)
         if plant_form.is_valid():
             plant_form.save()
+
+            messages.success(request, "Add new plant successfuly", "alert-success")
             return redirect('main:home_view')
         else:
             print("not valid form", plant_form.errors)
@@ -64,8 +72,12 @@ def all_plants_view(request:HttpRequest):
         #countries = Country.objects.filter( countries__id = request.GET[""])
 
     
+    page_number = request.GET.get("page",1)
+    paginator = Paginator(plants, 4)
+    plants_page = paginator.get_page(page_number )
+
     
-    context = { "plants" : plants, "countries":countries}
+    context = { "plants" : plants_page, "countries":countries}
 
     return render(request, "plants/all-plant.html",  context)
 
@@ -84,8 +96,14 @@ def plant_detail_view(request:HttpRequest, plant_id:int):
 #delete plant
 def plant_delete_view(request:HttpRequest, plant_id:int):
 
-    plant = Plant.objects.get(pk=plant_id)
-    plant.delete()
+    try:
+        plant = Plant.objects.get(pk=plant_id)
+        plant.delete()
+        messages.success(request, "Deleted plant successfuly", "alert-success")
+    except Exception as e:
+        print(e)
+        messages.error(request, "Couldn't delete plant", "alert-danger")
+
 
     return redirect("main:home_view")
 
@@ -101,6 +119,7 @@ def plant_update_view (request:HttpRequest, plant_id):
         plant_form = PlantForm(instance=plant, data= request.POST, files=request.FILES)
         if plant_form.is_valid():
             plant_form.save()
+            messages.success(request, "Update plant information successfuly", "alert-success")
         else:
             print(plant_form.errors)
 
@@ -169,11 +188,18 @@ def add_review_view( request:HttpRequest, plant_id:int ):
 #country filter
 def country_filter_view( request:HttpRequest, country_name):
 
-    if Country.objects.filter( name = country_name).exists():
-        plants = Plant.objects.filter( countries__name__in = [country_name]).order_by("-created_at")
-    elif country_name == "all":
+    #الطريقة الاولى عند استخدام فيلتر
+    #if Country.objects.filter( name = country_name).exists():
+     #   plants = Plant.objects.filter( countries__name__in = [country_name]).order_by("-created_at")
+    #elif country_name == "all":
+     #   plants = Plant.objects.all().order_by("-created_at")
+    #else:
+     #   plants = []
+    
+    #الطريقة الثانية عند استخدام فيلتر
+    if country_name == "all":
         plants = Plant.objects.all().order_by("-created_at")
-    else:
-        plants = []
+    else :
+        plants = Plant.objects.filter( countries__name__in = [country_name]).order_by("-created_at")
 
     return render(request, "plants/country.html", {"plants":plants , "country_name":country_name })

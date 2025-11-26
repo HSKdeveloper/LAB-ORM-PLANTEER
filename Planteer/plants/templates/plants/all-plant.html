@@ -68,4 +68,25 @@
 
 {% include 'plants/plants-list.html' %}
 
+<!-- Pagination settings -->
+ <div class="pagination d-flex justify-content-center align-items-center mt-5 gap-4">
+    {% if plants.has_previous %}
+        <div class="d-flex gap-1">
+            <a href="?page=1">&laquo; first page </a>
+            <a href="?page={{ plants.previous_page_number }}">&laquo; previous page </a>
+        </div>
+    {% endif %}
+
+    <div class="current">
+        Page {{ plants.number }} of {{ plants.paginator.num_pages}}
+    </div>
+
+    {% if plants.has_next %}
+        <div class="d-flex gap-1">
+            <a href="?page={{ plants.next_page_number }}"> next page </a>
+            <a href="?page={{ plants.paginator.num.pages }}"> last page </a>
+        </div>
+
+    {% endif %}
+</div>
 {% endblock %}
