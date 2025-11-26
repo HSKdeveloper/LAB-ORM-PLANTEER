@@ -1,0 +1,16 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+<!-- Page title -->
+{% block title %} Plant Country list{% endblock %}
+
+
+{% block content %}
+
+<h1>
+    Plants in {{ country_name }}  
+</h1>
+
+{% include 'plants/plants-list.html' %}
+
+{% endblock %}

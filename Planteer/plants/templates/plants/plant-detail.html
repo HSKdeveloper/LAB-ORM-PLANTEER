@@ -34,7 +34,7 @@
                 <h5>Native to: </h5>
                 <div class="d-flex gap-2">
                     {% for country in plant.countries.all  %}
-                        <a href="{% url 'plants:all_plants_view' %}"><p class="{{country}}"> {{ country }} </p></a>
+                        <a href="{% url 'plants:country_filter_view' country.name  %}"><p class="{{country}}"> {{ country }} </p></a>
                     {% endfor %}
 
                 </div>
@@ -59,6 +59,10 @@
 </div>
 
 
+{%  with filter_plant as plants %}
+    {% include 'plants/plants-list.html' %}
+{% endwith %}
+<!--
     <ul>
         <div class="row mt-5 row-cols-1 row-cols-md-3 g-4">
         {% for similar in filter_plant %}
@@ -82,6 +86,8 @@
         {% endfor %}
 </div>   
  </ul>
+-->
+
 
 <hr>
 

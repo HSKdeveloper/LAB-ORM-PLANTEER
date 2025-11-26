@@ -122,7 +122,7 @@ def plant_update_view (request:HttpRequest, plant_id):
 
 #search about plant
 def plant_search_view(request:HttpRequest):
-    
+
     if "search" in request.GET and len(request.GET ["search"]) >= 1:
         plants = Plant.objects.filter(name__contains = request.GET["search"])
 
@@ -165,3 +165,15 @@ def add_review_view( request:HttpRequest, plant_id:int ):
         new_review.save()
 
     return redirect("plants:plant_detail_view", plant_id = plant_id)
+
+#country filter
+def country_filter_view( request:HttpRequest, country_name):
+
+    if Country.objects.filter( name = country_name).exists():
+        plants = Plant.objects.filter( countries__name__in = [country_name]).order_by("-created_at")
+    elif country_name == "all":
+        plants = Plant.objects.all().order_by("-created_at")
+    else:
+        plants = []
+
+    return render(request, "plants/country.html", {"plants":plants , "country_name":country_name })

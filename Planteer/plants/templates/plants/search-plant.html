@@ -34,6 +34,7 @@
     <p class="bg-warning p-3 rounded" > No results found for your search {{ request.GET.search }}</p>
 {% endif %}
 
+<!--
 <div class="row mt-2 row-cols-1 row-cols-md-3 g-4 d-flex justify-content-center ">
 
     {% for plant in plants %}
@@ -51,4 +52,6 @@
   
   
 </div>
+-->
+{% include 'plants/plants-list.html' %}
 {% endblock %}
